@@ -1,10 +1,11 @@
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
-
+const cors = require("cors")
 const express = require("express")
 const jwt = require("jsonwebtoken")
 const app = express();
 
+app.use(cors())
 app.use(express.json())
 app.use(express.static(__dirname + "/public"));
 const users = []
