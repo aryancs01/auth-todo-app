@@ -1,0 +1,149 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #010101;
+}
+
+#root{
+    height: 400px;
+    width: 25%;
+    border: 1px solid black;
+}
+
+header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(53, 53, 232);
+}
+
+header h3{
+    color: white;
+}
+
+#create-todo input{
+    background-color: white;
+    border: none;
+    height: 25px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#create-todo button{
+    background-color: white;
+    border: none;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(230, 75, 75);
+    color: white;
+}
+
+#signup button{
+    background-color: white;
+    padding: 10px;
+    width: 90px;
+    cursor: pointer;
+}
+
+#signin button{
+    background-color: white;
+    padding: 10px;
+    width: 90px;
+    cursor: pointer;
+}
+
+main{
+    background-color: rgb(230, 75, 75);
+    width: 100%;
+    height: 70%;
+}
+
+#user-info{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#user-info input{
+    height: 40px;
+    width: 60%;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+#user-info button{
+    height: 40px;
+    width: 40%;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+#todo-info {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#todo-info div{
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    background-color: rgb(157, 146, 146);
+    margin-bottom: 4px;
+}
+#todo-info div h4{
+    font-family: monospace;
+    color: white;
+    font-size: 20px;
+}
+
+#todo-info div button{
+    font-family: monospace;
+    color: white;
+    font-size: 17px;
+    border: none;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+ width: 100%;
+ height: 30px;
+}
+
+footer button{
+    width: 100%;
+    height: 100%;
+    font-size: 17px;
+    padding: 5px;
+    cursor: pointer;
+}

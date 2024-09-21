@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <title>My Todo</title>
+        <link rel="stylesheet" href="style1.css">
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let ctr = null;
+        if(localStorage.getItem("ctr")){
+             ctr=parseInt(localStorage.getItem("ctr"));
+
+        }else{
+            localStorage.setItem("ctr",0)
+            ctr=parseInt(localStorage.getItem("ctr"));
+        }
+        
+        async function addTodo(){
+            const input = document.getElementById("input-todo").value;
+            const response = await axios.post("http://localhost:3000/addtodo",{
+                content:input,
+                id:ctr
+            },{
+                headers:{
+                    Authentication:"hey",
+                    token:localStorage.getItem("token")
+                }
+            })
+            getTodo()
+            ctr++;
+            localStorage.setItem("ctr",ctr)
+
+        }
+
+        async function getTodo(){
+            document.getElementById("todo-info").innerHTML = ""
+            const response = await axios.get("http://localhost:3000/gettodo",{
+                headers:{
+                    Authentication:"hey",
+                    token:localStorage.getItem("token")
+                }
+            })
+        
+            const arr = response.data
+            console.log(arr);
+
+            for(let i=0;i<arr.length;i++){
+                renderTodo(arr[i]);
+            }
+           
+        }
+
+        function renderTodo(todo){
+            const h4 = document.createElement("h4");
+            h4.innerHTML = todo.content;
+
+            const del = document.createElement("button");
+            del.innerHTML = "Delete"
+            del.addEventListener("click",function(){
+                removetodo(todo.id);
+            })
+
+            const div = document.createElement("div");
+            div.appendChild(h4);
+            div.appendChild(del);
+
+            document.getElementById("todo-info").appendChild(div);
+            
+        }
+
+        async function removetodo(id){
+           const response = await axios.delete("http://localhost:3000/deletetodo",{
+            headers: {
+                Authentication: "hey",
+                token: localStorage.getItem("token")
+            },
+            data: {
+                 id: id
+            }})
+            console.log(response.data);
+            getTodo()
+            window.location.href = "todo.html"
+        }
+
+        function login(){
+            localStorage.removeItem("token")
+            localStorage.removeItem("ctr")
+            window.location.href = "signup.html"
+        }
+
+        window.onload = ()=>{
+            getTodo();
+        }
+
+    </script>
+    <body>
+        <div id="root">
+            <header>
+                <h3>Create your Todo</h3>
+                <div id="create-todo">
+                    <input id="input-todo" type="text" placeholder="Enter your todo">
+                    <button onclick="addTodo()">Add Todo</button>
+                </div>
+            </header>
+            <main>
+                <div id="todo-info">
+                    
+                </div>
+            </main>
+            <footer>
+                <button onclick="login()">Login</button>
+            </footer>
+        </div> 
+    </body>
+</html>

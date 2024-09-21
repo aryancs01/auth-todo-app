@@ -1,0 +1,48 @@
+<html></html>
+    <head>
+        <title> Signin page</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            async function signin(){
+                const input = document.getElementById("signin-username").value;
+                const password = document.getElementById("signin-password").value;
+    
+                const response = await axios.post("http://localhost:3000/signin",{
+                    username:input,
+                    password:password
+                })
+                
+                if(response){
+                    localStorage.setItem("token",response.data.token)
+                    window.location.href = "todo.html"
+                    alert(`Done`)
+                }else{
+                    alert("Something going on")
+                }
+            }
+       
+        </script>
+    </head>
+    <body>
+        <div id="root">
+            <header>
+                <div id="signin">
+                    <button>Signin</button>
+                </div>
+                <div id="signin">
+                    <a href="signup.html">
+                        <button>Signup</button>
+                    </a>
+                </div>
+            </header>
+            <main>
+                <div id="user-info">
+                    <input id="signin-username" type="text" placeholder="Enter Username">
+                    <input id="signin-password" type="text" placeholder="Enter Password">
+                    <button onclick="signin()">Submit</button>
+                </div>
+            </main>
+        </div>  
+    </body>
+</html>
